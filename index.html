@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      #root p {
+        color: aliceblue;
+        font-size: 20px;
+        background-color: green;
+        text-align: center;
+        width: 200px;
+      }
+
+      #btn_plus {
+        background-color: red;
+        border: 2px solid black;
+        width: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/javascript">
+      console.log(React);
+      console.log(ReactDOM);
+
+      // React.createElement(
+      //   type, // 태그이름 문자열 | 리액트 컴포넌트 | React.Fragment
+      //   [props], // 리액트 컴포넌트에 넣어주는 데이터 객체
+      //   [ ... childern] // 자식으로 넣어주는 요소들.
+      // );
+      // 1. 태그 이름 누자열 type
+      // <h1>type이 "태그 이름 문자열" 입니다.</h1>
+      // ReactDOM.render(
+      //   React.createElement('h1', null, `type이 "태그 이름 문자열" 입니다.`),
+      //   document.querySelector('#root')
+      // )
+
+      // // 2. 리액트 컴포넌트 type
+      // const Component = () => {
+      //   return React.createElement('p', null, `type이 "리액트 컴포넌트' 입니다`)
+      // }
+      // // <Component></Component> => <Conponent /> => <p></p>
+      // ReactDOM.render(
+      //   React.createElement(Component, null, null),
+      //   document.querySelector("#root")
+      // )
+
+      // 3. React.Fragment
+      // ReactDOM.render(
+      //   React.createElement(
+      //     React.Fragment,
+      //     null,
+      //     `type이 "React Fragmemt"입니다`,
+      //     `type이 "React Fragmemt"입니다`,
+      //     `type이 "React Fragmemt"입니다`
+      //   ),
+      //   document.querySelector("#root")
+      // );
+
+      // 4. 복잡한 리액트 엘리먼트 모임
+      // // <div><div><h1>주제</h1><ul><li></li></ul></div></div> <= 쓰기 너무 복잡하고, 가독성 낮음
+      // ReactDOM.render(
+      //   React.createElement(
+      //     "div",
+      //     null,
+      //     React.createElement(
+      //       'div',
+      //       null,
+      //       React.createElement("h1", null, "주제"),
+      //       React.createElement("ul", null,
+      //         React.createElement("li", null,"React"),
+      //         React.createElement("li", null,"Vue"),
+      //         React.createElement("li", null,"Anguler")
+      //       ))),
+      //   document.querySelector("#root")
+      // )
+    </script>
+    <script type="text/babel">
+      console.log(React);
+      console.log(ReactDOM);
+      //  우리가 작성한 어떤 코드 => 순수하게 실행할수 있는 자바스크립트
+      //  babel
+      // JSX 문법
+      // {a:"a"}
+      // ReactDOM.render(
+      //   <div a="a">
+      //     <h1>
+      //       <ul>
+      //         <li>react</li>
+      //         <li>Vue</li>
+      //         <p>awsome</p>
+      //       </ul>
+      //     </h1>
+      //   </div>,
+      //   document.querySelector("#root")
+      // )
+
+      // function Component(props){
+      //   return (
+      //     <div><h1>{props.message} 이것은 함수로 만든 컴포넌트입니다.</h1></div>
+      //   );
+      // }
+      // Component.defaultProps = {
+      //   message: "기본값!!!",
+      // };
+
+      class Component extends React.Component {
+        // state는 항상 객체여야함
+        // state = {
+        //   count: 0,
+        // }
+        constructor(props) {
+          super(props);
+          //
+          this.state = { count: 0 };
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>{this.props.message} 이것은 Class로 만든 컴포넌트입니다.</h1>
+              <p>{this.state.count}</p>
+            </div>
+          );
+        }
+
+        componentDidMount() {
+          setTimeout(() => {
+            // this.state.count =
+            // this.setState({
+            //   count: this.state.count +1,
+            // })
+            this.setState((previousState) => {
+              const newState = { count: previousState.count + 1 };
+              return newState;
+            });
+          }, 1000);
+        }
+        //함수에서 만 사용가능한 기본값설정
+        static defaultProps = {
+          message: '기본값2',
+        };
+      }
+
+      //메시지값이 지정되지 않았을때 Class와 함수에서 기본값 설정하기
+
+      ReactDOM.render(
+        <Component message='기본값 아님' />,
+        document.querySelector('#root')
+      );
+
+      //  Event Handling
+    </script>
+  </body>
+</html>

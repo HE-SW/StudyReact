@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      #root p {
+        color: aliceblue;
+        font-size: 20px;
+        background-color: green;
+        text-align: center;
+        width: 200px;
+      }
+
+      #btn_plus {
+        background-color: red;
+        border: 2px solid black;
+        width: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      console.log(React);
+      console.log(ReactDOM);
+
+      class App extends React.Component {
+        state = {
+          age: 39,
+        };
+        constructor(props) {
+          super(props);
+          console.log('constructor', props);
+        }
+        render() {
+          console.log('render');
+          return (
+            <div>
+              <h2>
+                Hello {this.props.name} - {this.state.age}
+              </h2>
+            </div>
+          );
+        }
+        componentWillMount() {
+          console.log('componentWillMount');
+        }
+        componentDidMount() {
+          console.log('componentDidMount');
+
+          setInterval(() => {
+            // console.log('setInterval');
+            this.setState((state) => ({ ...state, age: state.age + 1 }));
+          }, 1000);
+        }
+      }
+      ReactDOM.render(<App name='Mark' />, document.querySelector('#root'));
+    </script>
+  </body>
+</html>
