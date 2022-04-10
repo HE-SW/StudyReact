@@ -45,3 +45,34 @@ Props와 State를 바탕으로 컴포넌트를 그림
 탄생 => 죽음
 
 initialization - Mounting - Updation - Unmounting
+
+
+## componetWillReceiveProps
+
+- props를 새로지정했을 때 바로 호출됨
+- 여기는 state의 변경에 반응하지 않음
+  - 여기서 props의 값에 따라 state를 변경해야 한다면
+    - setState를 이용해 state를 변경합니다.
+    - 그러면 다음 이벤트로 각각 가는것이 아니라 한번에 변경됨
+
+## shouldComponentUpdate
+
+- props 만 변경되어도
+- state만 변경되어도
+- props & state 둘다 변경되어도
+- newProps와 new State를 인자로 해서 호출
+- return type이 boolean
+  - true 면 render
+  - false면 render가 호출 되지 않음
+  - 이 함수를 구현하지 않으면, 디폴트 true
+
+## componentWillUpdate
+
+- 컴포넌트가 재 랜더링 되기 직전에 불림
+- setState같은 것은 쓰면 안됨
+
+## componentDidUpdate
+
+- 컴포넌트가 재랜더링을 마치면 불림
+
+## Component 에러 캐치
